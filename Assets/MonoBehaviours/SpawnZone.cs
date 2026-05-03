@@ -13,6 +13,11 @@ public class SpawnZone : MonoBehaviour
         ParentLane = GetComponentInParent<Lane>();
     }
 
+    void Start()
+    {
+        Owner.SpawnZones.Add(this);
+    }
+
     void Update()
     {
         

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Spawner
@@ -7,7 +8,7 @@ public class Spawner
     private int _spawnsLeft;
     private float _timeElapsed;
 
-    public Spawner(SpawnerData  data)
+    public Spawner(SpawnerData data)
     {
         StaticData = data;
         _spawnsLeft = data.NumSpawns;
@@ -48,8 +49,8 @@ public class Spawner
 public class FactionSpawner : MonoBehaviour
 {
     public Faction OwnerFaction;
+    [HideInInspector]
     public List<Spawner> Spawners;
-    public List<SpawnZone> SpawnZones;
     public List<Unit> SpawnableUnitPrefabs;
 
     private int _timeElapsed;
@@ -57,12 +58,27 @@ public class FactionSpawner : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        Spawners = new();
+        foreach (var spawnerData in OwnerFaction.StaticData.BaseSpawns)
+        {
+            Spawners.Add(new(spawnerData));
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        var unitsToSummonThisTurn = new List<UnitType>();
+        foreach (var spawner in Spawners)
+        {
+            unitsToSummonThisTurn.AddRange(spawner.UnitsToSpawn(Time.deltaTime));
+        }
+
+        foreach (var unitType in unitsToSummonThisTurn)
+        {
+            Unit summonablePrefab = SpawnableUnitPrefabs.First(sup => sup.StaticData == unitType);
+            summonablePrefab.OwnerFaction = OwnerFaction;
+            Instantiate(summonablePrefab);
+        }
     }
 }
