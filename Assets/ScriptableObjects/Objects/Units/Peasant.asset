@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UnitType
   DisplayName: Peasant
   Speed: 2
-  Health: 5
+  MaxHealth: 5
   AttackValue: 1
   AttackSpeed: 1
   AttackRange: 0

@@ -15,7 +15,7 @@ MonoBehaviour:
   DisplayName: England
   Adjective: English
   FactionColor: {r: 1, g: 0.042452812, b: 0.042452812, a: 1}
-  OffscreenBuildings:
+  BaseSpawns:
   - {fileID: 11400000, guid: cec3c68b9b1d3452d97f847b40c28ddd, type: 2}
   - {fileID: 11400000, guid: b63ee810ebf464480b49deedeb68d251, type: 2}
   Flag: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8112503902318261865}
   - component: {fileID: 2635436286100505369}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 6753185030486797808}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.20138362, w: -0.97951245}
-  m_LocalPosition: {x: -0.32000023, y: 0.89, z: -1}
+  m_LocalPosition: {x: -0.32000023, y: 0.89, z: -11}
   m_LocalScale: {x: 0.2, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -225,7 +225,7 @@ Transform:
   m_GameObject: {fileID: 7886356387040114214}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.3420444, w: -0.93968385}
-  m_LocalPosition: {x: 0.47, y: 0.62, z: -1}
+  m_LocalPosition: {x: 0.47, y: 0.62, z: -11}
   m_LocalScale: {x: 0.8, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UnitType
   DisplayName: Knight
   Speed: 1
-  Health: 50
+  MaxHealth: 50
   AttackValue: 5
   AttackSpeed: 1
   AttackRange: 0

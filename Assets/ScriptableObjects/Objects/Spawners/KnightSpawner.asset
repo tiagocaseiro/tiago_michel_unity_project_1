@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 519ea67c15fb945f1ac2c6203a951ea8, type: 3}
   m_Name: KnightSpawner
   m_EditorClassIdentifier: Assembly-CSharp::SpawnerData
-  SpawnWave:
+  SpawnWaves:
   - Type: {fileID: 11400000, guid: 85df309433e1546fa96baf5846592ca4, type: 2}
     Count: 2
-    Interval: 20
-  TotalNumWaves: -1
+  Interval: 20
+  NumSpawns: -1

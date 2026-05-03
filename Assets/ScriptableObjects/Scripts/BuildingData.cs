@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Building", menuName = "Scriptable Objects/BuildingData")]
-public abstract class BuildingData : ScriptableObject
+public class BuildingData : ScriptableObject
 {
     public string DisplayName;
     public int MaxHealth;
