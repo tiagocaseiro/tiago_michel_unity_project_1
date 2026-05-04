@@ -23,7 +23,6 @@ public class Lane : MonoBehaviour
 
     void Start()
     {
-        // #TODO_DEBUGGING: Why does this not work?
         DrawLane();
     }
 
@@ -46,12 +45,14 @@ public class Lane : MonoBehaviour
         }
     }
 
+    // #TODO_UTILS: Make this a util and put it somewhere shared
     Vector3[] GetCorners()
     {
         Vector3 forward = transform.up;
         Vector3 right = transform.right;
 
         Vector3 center = transform.position;
+        center.z -= 1;
 
         Vector3 halfForward = forward * _halfLength;
         Vector3 halfRight = right * _halfWidth;
