@@ -941,6 +941,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Faction
   StaticData: {fileID: 11400000, guid: 034c1322275a444d4b8174bfe81c024f, type: 2}
+  SpawnZones: []
 --- !u!114 &901596007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -953,8 +954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72a97442fd0574c6aa3c586b4bfbbb08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FactionSpawner
-  OwnerFaction: {fileID: 0}
-  SpawnZones: []
+  OwnerFaction: {fileID: 901596006}
   SpawnableUnitPrefabs:
   - {fileID: 1316920746570812205, guid: 507e7855632a24a9aa1447aa74db2c22, type: 3}
   - {fileID: 7437843419642638946, guid: 3bbd2fc710aad49f0a0a3cb5d47085e0, type: 3}
@@ -1002,6 +1002,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1103647331}
   - component: {fileID: 1103647332}
+  - component: {fileID: 1103647333}
   m_Layer: 0
   m_Name: France
   m_TagString: Untagged
@@ -1037,6 +1038,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Faction
   StaticData: {fileID: 11400000, guid: e8c5d75db9b1644aa99f3993118889e9, type: 2}
+  SpawnZones: []
+--- !u!114 &1103647333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103647330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72a97442fd0574c6aa3c586b4bfbbb08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FactionSpawner
+  OwnerFaction: {fileID: 1103647332}
+  SpawnableUnitPrefabs:
+  - {fileID: 1316920746570812205, guid: 507e7855632a24a9aa1447aa74db2c22, type: 3}
+  - {fileID: 7437843419642638946, guid: 3bbd2fc710aad49f0a0a3cb5d47085e0, type: 3}
+  - {fileID: 891839300640989468, guid: f3360b08ba4d04cd895db8502de34593, type: 3}
 --- !u!1 &1153320044
 GameObject:
   m_ObjectHideFlags: 0
