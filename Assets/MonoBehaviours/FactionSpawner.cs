@@ -78,7 +78,7 @@ public class FactionSpawner : MonoBehaviour
         {
             Unit summonablePrefab = SpawnableUnitPrefabs.First(sup => sup.StaticData == unitType);
             summonablePrefab.OwnerFaction = OwnerFaction;
-            SpawnZone zoneToSpawnIn = OwnerFaction.SpawnZones[Random.Range(0, OwnerFaction.SpawnZones.Count - 1)];
+            SpawnZone zoneToSpawnIn = OwnerFaction.SpawnZones[Random.Range(0, OwnerFaction.SpawnZones.Count)];
             Instantiate(summonablePrefab, zoneToSpawnIn.GetSpawnPosition(), Quaternion.identity);
         }
     }

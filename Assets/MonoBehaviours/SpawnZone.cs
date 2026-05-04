@@ -7,8 +7,8 @@ public class SpawnZone : MonoBehaviour
     public Faction Owner;
     [HideInInspector]
     public Lane ParentLane;
-    private float _length = 3f;
-    private float _width = 3f;
+    private float _halfLength = 3f;
+    private float _halfWidth = 3f;
 
     private List<Vector3> _lastChosenSpawnPositions;
 
@@ -17,8 +17,8 @@ public class SpawnZone : MonoBehaviour
         ParentLane = GetComponentInParent<Lane>();
         _lastChosenSpawnPositions = new List<Vector3>();
         SpriteRenderer renderer = GetComponent<SpriteRenderer>();
-        _length = renderer.bounds.extents.y;
-        _width = renderer.bounds.extents.x;
+        _halfLength = renderer.bounds.extents.y;
+        _halfWidth = renderer.bounds.extents.x;
     }
 
     void Start()
@@ -54,8 +54,8 @@ public class SpawnZone : MonoBehaviour
         Vector3 right = transform.right;
         Vector3 center = transform.position;
 
-        Vector3 halfForward = forward * (_length / 2f);
-        Vector3 halfRight = right * (_width / 2f);
+        Vector3 halfForward = forward * _halfLength;
+        Vector3 halfRight = right * _halfWidth;
         
         float randomX = Random.Range(center.x - halfRight.x, center.x + halfRight.x);
         float randomY = Random.Range(center.y - halfForward.y, center.y + halfForward.y);

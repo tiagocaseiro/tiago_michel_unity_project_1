@@ -5,24 +5,25 @@ using System.Collections.Generic;
 
 public class Lane : MonoBehaviour
 {
-    private SpriteRenderer _renderer;
+    private Renderer _renderer;
     private LineRenderer _borderDrawer;
     private List<SpawnZone> _spawnZones;
-    private float _length = 10f;
-    private float _width = 3f;
+    private float _halfLength = 10f;
+    private float _halfWidth = 3f;
 
     void Awake()
     {
-        _renderer = GetComponent<SpriteRenderer>();
+        _renderer = GetComponent<Renderer>();
         _borderDrawer = gameObject.AddComponent<LineRenderer>();
         _spawnZones = GetComponentsInChildren<SpawnZone>().ToList();
         _spawnZones.ForEach(sz => sz.ParentLane = this);
-        _length = _renderer.bounds.extents.y;
-        _width = _renderer.bounds.extents.x;
+        _halfLength = _renderer.bounds.extents.y;
+        _halfWidth = _renderer.bounds.extents.x;
     }
 
     void Start()
     {
+        // #TODO_DEBUGGING: Why does this not work?
         DrawLane();
     }
 
@@ -52,8 +53,8 @@ public class Lane : MonoBehaviour
 
         Vector3 center = transform.position;
 
-        Vector3 halfForward = forward * (_length / 2f);
-        Vector3 halfRight = right * (_width / 2f);
+        Vector3 halfForward = forward * _halfLength;
+        Vector3 halfRight = right * _halfWidth;
 
         Vector3 topLeft = center + halfForward - halfRight;
         Vector3 topRight = center + halfForward + halfRight;
