@@ -2,32 +2,35 @@ using System;
 using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
+using UnityEngine.Serialization;
 
 public class GameZone : MonoBehaviour
 {
     private Renderer _renderer;
     private LineRenderer _borderDrawer;
-    private List<GameZone> _children;
-    public GameZone ParentZone;
-    private float _halfLength = 10f;
-    private float _halfWidth = 3f;
-
+    [HideInInspector]
+    public List<GameZone> childZones;
+    [HideInInspector]
+    public GameZone parentZone;
+    protected float _halfLength;
+    protected float _halfWidth;
+    
     void Awake()
     {
         _renderer = GetComponent<Renderer>();
         _borderDrawer = gameObject.AddComponent<LineRenderer>();
-        _spawnZones = GetComponentsInChildren<SpawnZone>().ToList();
-        _spawnZones.ForEach(sz => sz.ParentLane = this);
+        childZones = GetComponentsInChildren<GameZone>().ToList();
+        childZones.ForEach(sz => sz.parentZone = this);
         _halfLength = _renderer.bounds.extents.y;
         _halfWidth = _renderer.bounds.extents.x;
     }
 
-    void Start()
+   protected virtual void Start()
     {
-        DrawLane();
+        //DrawZone();
     }
 
-    void DrawLane()
+    void DrawZone()
     {
         var corners = GetCorners();
 
@@ -42,7 +45,7 @@ public class GameZone : MonoBehaviour
     {
         if (_borderDrawer != null)
         {
-            DrawLane();
+            DrawZone();
         }
     }
 

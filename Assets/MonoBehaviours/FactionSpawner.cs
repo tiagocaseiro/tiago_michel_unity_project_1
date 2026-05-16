@@ -1,16 +1,18 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Spawner
 {
-    public SpawnerData StaticData;
+    private SpawnerData _staticData;
     private int _spawnsLeft;
     private float _timeElapsed;
 
     public Spawner(SpawnerData data)
     {
-        StaticData = data;
+        _staticData = data;
         _spawnsLeft = data.NumSpawns;
         _timeElapsed = 0;
     }
@@ -25,7 +27,7 @@ public class Spawner
         }
         
         _timeElapsed += deltaTime;
-        if (_timeElapsed >= StaticData.Interval)
+        if (_timeElapsed >= _staticData.Interval)
         {
             _timeElapsed = 0f;
             if (_spawnsLeft > 0)
@@ -33,7 +35,7 @@ public class Spawner
                 _spawnsLeft--;
             }
 
-            foreach (var spawnWave in StaticData.SpawnWaves)
+            foreach (var spawnWave in _staticData.SpawnWaves)
             {
                 for (int i = 0; i < spawnWave.Count; i++)
                 {
@@ -74,12 +76,27 @@ public class FactionSpawner : MonoBehaviour
             unitsToSummonThisTurn.AddRange(spawner.UnitsToSpawn(Time.deltaTime));
         }
 
+        var availableSpawnZones = OwnerFaction.SpawnZones.Where(sz => !sz.IsFull).ToList();
+        List<Tuple<Unit, SpawnZone>> spawnedUnits  = new();
         foreach (var unitType in unitsToSummonThisTurn)
         {
-            Unit summonablePrefab = SpawnableUnitPrefabs.First(sup => sup.StaticData == unitType);
-            summonablePrefab.OwnerFaction = OwnerFaction;
-            SpawnZone zoneToSpawnIn = OwnerFaction.SpawnZones[Random.Range(0, OwnerFaction.SpawnZones.Count)];
-            Instantiate(summonablePrefab, zoneToSpawnIn.GetSpawnPosition(), Quaternion.identity);
+            if (availableSpawnZones.Count == 0)
+            {
+                break;
+            }
+            Unit summonablePrefab = SpawnableUnitPrefabs.First(sup => sup.staticData == unitType);
+            summonablePrefab.ownerFaction = OwnerFaction;
+            SpawnZone zoneToSpawnIn = availableSpawnZones[Random.Range(0, availableSpawnZones.Count)];
+            Unit spawnedUnit = Instantiate(summonablePrefab, zoneToSpawnIn.transform.position, Quaternion.identity);
+            if (zoneToSpawnIn.TryAddUnit(spawnedUnit))
+            {
+                spawnedUnits.Add(new(spawnedUnit, zoneToSpawnIn));
+                if (zoneToSpawnIn.IsFull)
+                {
+                    availableSpawnZones.Remove(zoneToSpawnIn);
+                }
+            }
         }
+        spawnedUnits.ForEach(kvp => kvp.Item1.Init(kvp.Item2.parentLane));
     }
 }

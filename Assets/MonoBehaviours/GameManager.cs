@@ -28,14 +28,8 @@ public class GameManager : MonoBehaviour
         }
     }
     #endregion
-
-    // #TODO_NEXT: This shouldn't be a raw box collider
-    // Make GameZone a concept
-    // Make Lane a GameZone, + the bases
-    // GameZone can handle rendering itself + maybe being nested in another game zone
-    // This will be useful later for cards
-    // But anyway, even more useful: Then units can know which zone they're in, and can enter or exit it accordingly
-    public List<BoxCollider2D> GameZones;
+    
+    public List<Lane> AllLanes;
 
     //public List<Faction> Factions = new();
 

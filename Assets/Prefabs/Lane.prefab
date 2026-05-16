@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7622977466002972379}
   - component: {fileID: 1039683736845119820}
-  - component: {fileID: 2205086874159137562}
+  - component: {fileID: 3463678537429568817}
   m_Layer: 0
   m_Name: Player2Frontlines
   m_TagString: Untagged
@@ -92,7 +92,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &2205086874159137562
+--- !u!114 &3463678537429568817
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,11 +101,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 279034281793731387}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b75920a2a98c4dd38796f7aec8708d9, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d616d5d32cb4df7903b63a7a669f455, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpawnZone
-  Owner: {fileID: 0}
-  ParentLane: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::MonoBehaviours.UnitHoldingZone
+  childZones: []
+  parentZone: {fileID: 0}
+  _maxSlots: 9
+  _candidateGridResolution: 9
+  _edgePadding: 0.05
 --- !u!1 &829233348824617785
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,6 +216,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2abc90b04520460a853aaf9e13eec5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Lane
+  childZones: []
+  parentZone: {fileID: 0}
+  _playerZones:
+  - ownerFaction: {fileID: 0}
+    spawnZone: {fileID: 1383792416453383044}
+    reserveZone: {fileID: 5329690457853511762}
+    frontlineZone: {fileID: 5305738076663537330}
+  - ownerFaction: {fileID: 0}
+    spawnZone: {fileID: 3612435763827117607}
+    reserveZone: {fileID: 2202345388036396216}
+    frontlineZone: {fileID: 3463678537429568817}
 --- !u!61 &6359499801535023177
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -363,8 +377,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b75920a2a98c4dd38796f7aec8708d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnZone
+  childZones: []
+  parentZone: {fileID: 0}
+  _maxSlots: 9
+  _candidateGridResolution: 9
+  _edgePadding: 0.05
   Owner: {fileID: 0}
-  ParentLane: {fileID: 0}
 --- !u!1 &1363973959258027908
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,7 +393,7 @@ GameObject:
   m_Component:
   - component: {fileID: 989266606534699078}
   - component: {fileID: 4774332352794792737}
-  - component: {fileID: 7943063411002085775}
+  - component: {fileID: 5329690457853511762}
   m_Layer: 0
   m_Name: Player1Reserves
   m_TagString: Untagged
@@ -457,7 +475,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &7943063411002085775
+--- !u!114 &5329690457853511762
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -466,11 +484,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1363973959258027908}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b75920a2a98c4dd38796f7aec8708d9, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d616d5d32cb4df7903b63a7a669f455, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpawnZone
-  Owner: {fileID: 0}
-  ParentLane: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::MonoBehaviours.UnitHoldingZone
+  childZones: []
+  parentZone: {fileID: 0}
+  _maxSlots: 9
+  _candidateGridResolution: 9
+  _edgePadding: 0.05
 --- !u!1 &3187017090465400008
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,7 +502,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4489526536795663914}
   - component: {fileID: 4314073103301907798}
-  - component: {fileID: 2838422438429750419}
+  - component: {fileID: 2202345388036396216}
   m_Layer: 0
   m_Name: Player2Reserves
   m_TagString: Untagged
@@ -563,7 +584,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &2838422438429750419
+--- !u!114 &2202345388036396216
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -572,11 +593,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 3187017090465400008}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b75920a2a98c4dd38796f7aec8708d9, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d616d5d32cb4df7903b63a7a669f455, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpawnZone
-  Owner: {fileID: 0}
-  ParentLane: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::MonoBehaviours.UnitHoldingZone
+  childZones: []
+  parentZone: {fileID: 0}
+  _maxSlots: 9
+  _candidateGridResolution: 9
+  _edgePadding: 0.05
 --- !u!1 &4467071579968045039
 GameObject:
   m_ObjectHideFlags: 0
@@ -681,7 +705,7 @@ GameObject:
   m_Component:
   - component: {fileID: 192027962546915937}
   - component: {fileID: 4343012861651654708}
-  - component: {fileID: 3064987622165303090}
+  - component: {fileID: 5305738076663537330}
   m_Layer: 0
   m_Name: Player1Frontlines
   m_TagString: Untagged
@@ -763,7 +787,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &3064987622165303090
+--- !u!114 &5305738076663537330
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -772,11 +796,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6011778317022750548}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b75920a2a98c4dd38796f7aec8708d9, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d616d5d32cb4df7903b63a7a669f455, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpawnZone
-  Owner: {fileID: 0}
-  ParentLane: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::MonoBehaviours.UnitHoldingZone
+  childZones: []
+  parentZone: {fileID: 0}
+  _maxSlots: 9
+  _candidateGridResolution: 9
+  _edgePadding: 0.05
 --- !u!1 &6156625339407368920
 GameObject:
   m_ObjectHideFlags: 0
@@ -975,5 +1002,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b75920a2a98c4dd38796f7aec8708d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnZone
+  childZones: []
+  parentZone: {fileID: 0}
+  _maxSlots: 9
+  _candidateGridResolution: 9
+  _edgePadding: 0.05
   Owner: {fileID: 0}
-  ParentLane: {fileID: 0}

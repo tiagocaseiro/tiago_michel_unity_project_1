@@ -1,36 +1,21 @@
 using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
+using MonoBehaviours;
 
-public class SpawnZone : MonoBehaviour
+public class SpawnZone : UnitHoldingZone
 {
     public Faction Owner;
-    [HideInInspector]
-    public Lane ParentLane;
-    private float _halfLength = 3f;
-    private float _halfWidth = 3f;
+    public Lane parentLane => parentZone as Lane;
 
     private List<Vector3> _lastChosenSpawnPositions;
-
-    void Awake()
+    
+    protected override void Start()
     {
-        ParentLane = GetComponentInParent<Lane>();
-        _lastChosenSpawnPositions = new List<Vector3>();
-        SpriteRenderer renderer = GetComponent<SpriteRenderer>();
-        _halfLength = renderer.bounds.extents.y;
-        _halfWidth = renderer.bounds.extents.x;
-    }
-
-    void Start()
-    {
+        base.Start();
         Owner.SpawnZones.Add(this);
     }
-
-    void Update()
-    {
-        
-    }
-
+    
     public Vector3 GetSpawnPosition()
     {
         while (true)

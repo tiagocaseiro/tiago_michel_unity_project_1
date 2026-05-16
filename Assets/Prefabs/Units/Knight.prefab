@@ -104,5 +104,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fe1d526c5dad41058ce982b5b276e69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Unit
-  StaticData: {fileID: 11400000, guid: 85df309433e1546fa96baf5846592ca4, type: 2}
-  OwnerFaction: {fileID: 0}
+  staticData: {fileID: 11400000, guid: 85df309433e1546fa96baf5846592ca4, type: 2}
+  ownerFaction: {fileID: 0}
+  presentLane: {fileID: 0}

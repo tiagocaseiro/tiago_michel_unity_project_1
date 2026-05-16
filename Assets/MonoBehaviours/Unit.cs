@@ -1,11 +1,31 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Unit : MonoBehaviour
 {
-    public UnitType StaticData;
-    public Faction OwnerFaction;
-    public GameObject CurrentZone;
+    public UnitType staticData;
+    public Faction ownerFaction;
+    public Lane presentLane;
     private SpriteRenderer _spriteRenderer;
+    private Vector3 _targetPosition;
+    private float _moveSpeed = 0.5f;
+
+    enum MovementState
+    {
+        JustSpawned,
+        MovingToReserves,
+        WaitingInReserves,
+        MovingToFrontlines,
+        Fighting
+    }
+    
+    private MovementState _movementState = MovementState.JustSpawned;
+
+    public void Init(Lane lane)
+    {
+        presentLane = lane;
+        transform.position = _targetPosition;
+    }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -14,9 +34,75 @@ public class Unit : MonoBehaviour
         SetColor();
     }
 
+    void Update()
+    {
+        if (presentLane is null)
+        {
+            return;
+        }
+        switch (_movementState)
+        {
+            case MovementState.JustSpawned:
+                if (presentLane.GetReservesForUnit(this).TryAddUnit(this))
+                {
+                    _movementState = MovementState.MovingToReserves;
+                }
+
+                if (!AtDestination())
+                {
+                    Advance();
+                }
+                break;
+            case MovementState.MovingToReserves:
+                Advance();
+                if (AtDestination())
+                {
+                    _movementState = MovementState.WaitingInReserves;
+                }
+                break;
+            case MovementState.WaitingInReserves:
+                if (!AtDestination())
+                {
+                    Advance();
+                }
+
+                if (presentLane.GetFrontlineForUnit(this).TryAddUnit(this))
+                {
+                    _movementState = MovementState.MovingToFrontlines;
+                }
+                break;
+            case MovementState.MovingToFrontlines:
+                Advance();
+                if (AtDestination())
+                {
+                    _movementState = MovementState.Fighting;
+                }
+                break;
+            case MovementState.Fighting:
+                if (!AtDestination())
+                {
+                    Advance();
+                }
+                break;
+        }
+    }
+
+    void Advance()
+    {
+        transform.position = Vector3.MoveTowards(
+            transform.position,
+            _targetPosition,
+            _moveSpeed * Time.deltaTime);
+    }
+
+    bool AtDestination()
+    {
+        return Vector3.Distance(transform.position, _targetPosition) <= 0.1f;
+    }
+
     void SetColor()
     {
-        Color baseColor = OwnerFaction.StaticData.FactionColor;
+        Color baseColor = ownerFaction.StaticData.FactionColor;
         // Add a little spice
         Color.RGBToHSV(baseColor, out float h, out float s, out float v);
 
@@ -28,9 +114,8 @@ public class Unit : MonoBehaviour
         _spriteRenderer.color = newColor;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetTargetPosition(Vector3 position)
     {
-        
+        _targetPosition = position;
     }
 }
