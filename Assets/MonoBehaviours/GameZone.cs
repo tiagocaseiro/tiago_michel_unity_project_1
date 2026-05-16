@@ -1,0 +1,75 @@
+using System;
+using UnityEngine;
+using System.Linq;
+using System.Collections.Generic;
+
+public class GameZone : MonoBehaviour
+{
+    private Renderer _renderer;
+    private LineRenderer _borderDrawer;
+    private List<GameZone> _children;
+    public GameZone ParentZone;
+    private float _halfLength = 10f;
+    private float _halfWidth = 3f;
+
+    void Awake()
+    {
+        _renderer = GetComponent<Renderer>();
+        _borderDrawer = gameObject.AddComponent<LineRenderer>();
+        _spawnZones = GetComponentsInChildren<SpawnZone>().ToList();
+        _spawnZones.ForEach(sz => sz.ParentLane = this);
+        _halfLength = _renderer.bounds.extents.y;
+        _halfWidth = _renderer.bounds.extents.x;
+    }
+
+    void Start()
+    {
+        DrawLane();
+    }
+
+    void DrawLane()
+    {
+        var corners = GetCorners();
+
+        _borderDrawer.positionCount = corners.Length;
+        _borderDrawer.useWorldSpace = true;
+        _borderDrawer.loop = false;
+
+        _borderDrawer.SetPositions(corners);
+    }
+
+    void OnDrawGizmos()
+    {
+        if (_borderDrawer != null)
+        {
+            DrawLane();
+        }
+    }
+
+    // #TODO_UTILS: Make this a util and put it somewhere shared
+    Vector3[] GetCorners()
+    {
+        Vector3 forward = transform.up;
+        Vector3 right = transform.right;
+
+        Vector3 center = transform.position;
+        center.z -= 1;
+
+        Vector3 halfForward = forward * _halfLength;
+        Vector3 halfRight = right * _halfWidth;
+
+        Vector3 topLeft = center + halfForward - halfRight;
+        Vector3 topRight = center + halfForward + halfRight;
+        Vector3 bottomRight = center - halfForward + halfRight;
+        Vector3 bottomLeft = center - halfForward - halfRight;
+
+        return new Vector3[]
+        {
+            topLeft,
+            topRight,
+            bottomRight,
+            bottomLeft,
+            topLeft // close the loop
+        };
+    }
+}
