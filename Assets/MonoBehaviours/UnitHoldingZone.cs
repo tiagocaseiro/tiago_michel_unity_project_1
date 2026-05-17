@@ -53,9 +53,8 @@ namespace MonoBehaviours
 
             for (int i = 0; i < _units.Count; i++)
             {
-                Vector3 local = transform.position + new Vector3(localSlots[i].x, localSlots[i].y, -1);
-                //Vector3 world = transform.TransformPoint(local);
-                _units[i].SetTargetPosition(local);
+                Vector3 newPos = transform.position + new Vector3(localSlots[i].x, localSlots[i].y, -1);
+                _units[i].SetTargetPosition(newPos);
             }
         }
 

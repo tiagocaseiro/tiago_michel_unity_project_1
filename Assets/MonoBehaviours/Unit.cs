@@ -45,6 +45,7 @@ public class Unit : MonoBehaviour
             case MovementState.JustSpawned:
                 if (presentLane.GetReservesForUnit(this).TryAddUnit(this))
                 {
+                    presentLane.GetSpawnZoneForFaction(ownerFaction).RemoveUnit(this);
                     _movementState = MovementState.MovingToReserves;
                 }
 
@@ -68,6 +69,7 @@ public class Unit : MonoBehaviour
 
                 if (presentLane.GetFrontlineForUnit(this).TryAddUnit(this))
                 {
+                    presentLane.GetReservesForUnit(this).RemoveUnit(this);
                     _movementState = MovementState.MovingToFrontlines;
                 }
                 break;
