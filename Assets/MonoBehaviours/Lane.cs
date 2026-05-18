@@ -16,6 +16,11 @@ public class Lane : GameZone
     }
 
     [SerializeField] private List<PlayerZone> _playerZones;
+    [SerializeField] private List<Building> _nearbyBuildings;
+    // #TODO_NEXT: Units and buildings need to create health components from their health datas
+    // Then lanes need to register nearby buildings + units in fighting zones' health components 
+    // Making all these things targetable
+    private List<HealthComponent> _targetsInLane;
 
     // void Start()
     // {

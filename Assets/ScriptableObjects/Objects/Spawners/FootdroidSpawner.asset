@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 519ea67c15fb945f1ac2c6203a951ea8, type: 3}
-  m_Name: KnightSpawner
+  m_Name: FootdroidSpawner
   m_EditorClassIdentifier: Assembly-CSharp::SpawnerData
   SpawnWaves:
-  - Type: {fileID: 11400000, guid: 85df309433e1546fa96baf5846592ca4, type: 2}
-    Count: 2
-  Interval: 20
+  - Type: {fileID: 11400000, guid: 6022cacb03b344543aaa2c7f8cdca178, type: 2}
+    Count: 3
+  Interval: 10
   NumSpawns: -1

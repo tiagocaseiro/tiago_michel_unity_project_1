@@ -1,15 +1,20 @@
 using UnityEngine;
 
+public enum TargeterType
+{
+    BuildingFavourer,
+    Neutral,
+    UnitFavourer
+}
+
 [CreateAssetMenu(fileName = "UnitType", menuName = "Scriptable Objects/UnitType")]
 public class UnitType : ScriptableObject
 {
-    public string DisplayName;
+    public string displayName;
     
-    public int Speed;
-    public int MaxHealth;
-    public int AttackValue;
-    public int AttackSpeed;
-    public int AttackRange;
-    
-    public Sprite Icon;
+    public int speed;
+    public HealthData health;
+    public TargeterType targeterType;
+    public int attackDamage;
+    public float attackIntervalSecs;
 }

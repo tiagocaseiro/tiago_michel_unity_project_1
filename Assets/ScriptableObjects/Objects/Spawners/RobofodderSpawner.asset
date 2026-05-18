@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 519ea67c15fb945f1ac2c6203a951ea8, type: 3}
-  m_Name: PeasantSpawner
+  m_Name: RobofodderSpawner
   m_EditorClassIdentifier: Assembly-CSharp::SpawnerData
   SpawnWaves:
   - Type: {fileID: 11400000, guid: b2f15a016a1be49e39aba8a5ec537c26, type: 2}
-    Count: 5
+    Count: 3
   Interval: 5
   NumSpawns: -1
